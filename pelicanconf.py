@@ -1,5 +1,5 @@
-AUTHOR = 'Daniel Ruelas-Petrisko'
-SITENAME = 'OpenASIC Consulting, LLC'
+AUTHOR = 'Dan Ruelas-Petrisko'
+SITENAME = 'Dan Ruelas-Petrisko'
 SITEURL = ""
 
 PATH = "content"
@@ -29,7 +29,9 @@ SOCIAL = (
     ("Another social link", "#"),
 )
 
-DEFAULT_PAGINATION = False
+DEFAULT_PAGINATION = 5
 
 # Uncomment following line if you want document-relative URLs when developing
-# RELATIVE_URLS = True
+RELATIVE_URLS = True
+
+THEME = './pelican-themes/Flex'
