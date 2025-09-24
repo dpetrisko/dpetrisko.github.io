@@ -7,11 +7,11 @@ on:
 
 jobs:
   deploy:
-    uses: "getpelican/pelican/.github/workflows/github_pages.yml@main"
+    uses: "getpelican/pelican/.github/workflows/github_pages.yml@b7408cb"
     permissions:
       contents: "read"
       pages: "write"
       id-token: "write"
     with:
       settings: "publishconf.py" # Optional: specify your publish settings file
-
+      theme: "https://github.com/alexandrevicenzi/Flex"
