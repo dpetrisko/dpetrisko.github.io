@@ -1,6 +1,6 @@
-AUTHOR = 'Dan Ruelas-Petrisko'
-SITENAME = 'Dan Ruelas-Petrisko'
-SITEURL = ""
+AUTHOR = 'Daniel (Dan) Ruelas-Petrisko'
+SITENAME = 'Daniel (Dan) Ruelas-Petrisko'
+SITEURL = "https://dpetrisko.github.io/website/"
 
 PATH = "content"
 
@@ -34,6 +34,4 @@ DEFAULT_PAGINATION = 5
 # Uncomment following line if you want document-relative URLs when developing
 RELATIVE_URLS = True
 
-# Theme configuration
-THEME = './pelican-themes/Flex'
-
+THEME = './pelican-themes/resume'
