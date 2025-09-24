@@ -14,3 +14,4 @@ jobs:
       id-token: "write"
     with:
       settings: "publishconf.py" # Optional: specify your publish settings file
+      theme: "https://github.com/alexandrevicenzi/Flex"
