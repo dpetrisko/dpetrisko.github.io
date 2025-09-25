@@ -1,37 +1,64 @@
-AUTHOR = 'Daniel (Dan) Ruelas-Petrisko'
-SITENAME = 'Daniel (Dan) Ruelas-Petrisko'
-SITEURL = "https://dpetrisko.github.io/website/"
+THEME = "pelican-themes/Flex"
+
+# Based of example: https://github.com/alexandrevicenzi/Flex/blob/master/docs/pelicanconf.py
+# https://github.com/alexandrevicenzi/Flex/wiki/Custom-Settings
+
+AUTHOR = "Daniel (Dan) Ruelas-Petrisko"
+SITEURL = "http://localhost:8000"
+SITENAME = "Dan's Blog"
+SITETITLE = "About Dan"
+SITESUBTITLE = "Open-Source ASICs"
+SITEDESCRIPTION = "Dan's personal blog about open-source hardware, software, and other topics."
+SITELOGO = "/images/bp_logo.png"
+FAVICON = "/favicon.ico"
+BROWSER_COLOR = "#333"
+PYGMENTS_STYLE = "monokai"
+
+ROBOTS = "index, follow"
 
 PATH = "content"
+OUTPUT_PATH = "output/"
+TIMEZONE = "America/Los_Angeles"
 
-TIMEZONE = 'America/Los_Angeles'
+DISABLE_URL_HASH = True
 
-DEFAULT_LANG = 'en'
+PLUGIN_PATHS = ["pelican-plugins"]
+PLUGINS = ["sitemap"]
 
-# Feed generation is usually not desired when developing
-FEED_ALL_ATOM = None
-CATEGORY_FEED_ATOM = None
-TRANSLATION_FEED_ATOM = None
-AUTHOR_FEED_ATOM = None
-AUTHOR_FEED_RSS = None
+CC_LICENSE = {
+    "name": "Creative Commons Attribution-NonCommercial-NoDerivatives",
+    "version": "4.0",
+    "slug": "by-nc-nd",
+    "icon": True,
+    "language": "en_US"
+}
 
-# Blogroll
-LINKS = (
-    ("Pelican", "https://getpelican.com/"),
-    ("Python.org", "https://www.python.org/"),
-    ("Jinja2", "https://palletsprojects.com/p/jinja/"),
-    ("You can modify those links in your config file", "#"),
-)
+COPYRIGHT_YEAR = 2025
 
-# Social widget
+STATIC_PATHS = ["images", "articles", "docs", "extra"]
+
+EXTRA_PATH_METADATA = {
+    "extra/robots.txt": {"path": "robots.txt"},
+    "extra/favicon.ico": {"path": "favicon.ico"}
+}
+
 SOCIAL = (
-    ("You can add links in your config file", "#"),
-    ("Another social link", "#"),
+    ("github", "https://github.com/dpetrisko"),
+    ("linkedin", "https://www.linkedin.com/in/dpetrisko/")
 )
 
-DEFAULT_PAGINATION = 5
+#CUSTOM_CSS = ""
 
-# Uncomment following line if you want document-relative URLs when developing
-RELATIVE_URLS = True
+MAIN_MENU = True
 
-THEME = './pelican-themes/resume'
+# Translate to English.
+DEFAULT_LANG = "en"
+OG_LOCALE = "en_US"
+LOCALE = "en_US"
+
+THEME_COLOR_AUTO_DETECT_BROWSER_PREFERENCE = True
+THEME_COLOR_ENABLE_USER_OVERRIDE = True
+
+LINKS_IN_NEW_TAB = False
+
+GITHUB_CORNER_URL = "https://github.com/dpetrisko"

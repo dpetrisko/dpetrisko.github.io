@@ -1,5 +1,8 @@
 {
     "search.exclude": {
-        "pelican-themes": true
+        ".github": true,
+        ".vscode": true,
+        "pelican-themes": true,
+        "pelican-plugins": true
     }
 }
