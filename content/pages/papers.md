@@ -5,6 +5,3 @@ Author: Dan Ruelas-Petrisko
 Papers are listed chronologically.
 
 {! refs.md!}
-
-This is my [resume](/papers/resume.pdf)
-

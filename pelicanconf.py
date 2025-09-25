@@ -5,9 +5,9 @@ THEME = "pelican-themes/Flex"
 
 AUTHOR = "Daniel (Dan) Ruelas-Petrisko"
 SITEURL = "http://localhost:8000"
-SITENAME = "Dan's Blog"
-SITETITLE = "About Dan"
-SITESUBTITLE = "Open-Source ASICs"
+SITENAME = "Dan Ruelas-Petrisko's Website"
+SITETITLE = SITENAME
+SITESUBTITLE = "PhD, Full-Stack ASIC Engineer, Open-Source Hardware Advocate"
 SITEDESCRIPTION = (
     "Dan's personal blog about open-source hardware, software, and other topics."
 )
@@ -25,9 +25,12 @@ TIMEZONE = "America/Los_Angeles"
 DISABLE_URL_HASH = True
 
 PLUGIN_PATHS = ["pelican-plugins", "plugins"]
-PLUGINS = ["bibtex_list"]
+PLUGINS = ["bibtex_list", "pelican_githubprojects"]
 
-PUBLICATION_SRC = "papers/refs.bib"
+GITHUB_USER = "dpetrisko"
+GITHUB_USER_TYPE = "owner"
+GITHUB_SORT_BY = "created"
+GITHUB_DIRECTION = "desc"
 
 CC_LICENSE = {
     "name": "Creative Commons Attribution-NonCommercial-NoDerivatives",
@@ -55,6 +58,7 @@ EXTRA_PATH_METADATA = {
 SOCIAL = (
     ("github", "https://github.com/dpetrisko"),
     ("linkedin", "https://www.linkedin.com/in/dpetrisko/"),
+    ("orcid", "https://orcid.org/0000-0002-0555-6919"),
 )
 
 USE_FOLDER_AS_CATEGORY = False

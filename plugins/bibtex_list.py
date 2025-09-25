@@ -74,3 +74,4 @@ def get_generators(generators):
 
 def register():
     signals.get_generators.connect(get_generators)
+    signals.content_written.connect(lambda: BibTeXListGenerator().generate_output(None))
