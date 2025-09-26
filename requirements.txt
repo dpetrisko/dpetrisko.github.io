@@ -1,0 +1,4 @@
+pelican>=4.11.0
+pybtex>=0.25.1
+Markdown>=3.9
+Jinja2>=3.1.6
