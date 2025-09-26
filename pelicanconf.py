@@ -25,7 +25,7 @@ TIMEZONE = "America/Los_Angeles"
 DISABLE_URL_HASH = True
 
 PLUGIN_PATHS = ["pelican-plugins", "plugins"]
-PLUGINS = ["bibtex_list", "jinja2content"]
+PLUGINS = ["bibtex_list", "github_list"]
 
 THEME_TEMPLATES_OVERRIDES = ["content/templates"]
 
