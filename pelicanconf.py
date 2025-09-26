@@ -25,12 +25,14 @@ TIMEZONE = "America/Los_Angeles"
 DISABLE_URL_HASH = True
 
 PLUGIN_PATHS = ["pelican-plugins", "plugins"]
-PLUGINS = ["bibtex_list", "pelican_githubprojects"]
+PLUGINS = ["bibtex_list", "jinja2content"]
+
+THEME_TEMPLATES_OVERRIDES = ["content/templates"]
 
 GITHUB_USER = "dpetrisko"
-GITHUB_USER_TYPE = "owner"
-GITHUB_SORT_BY = "created"
-GITHUB_DIRECTION = "desc"
+GITHUB_USER_TYPE = "all"
+#GITHUB_SORT_BY = "created"
+#GITHUB_DIRECTION = "desc"
 
 CC_LICENSE = {
     "name": "Creative Commons Attribution-NonCommercial-NoDerivatives",

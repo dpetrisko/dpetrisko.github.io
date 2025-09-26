@@ -36,6 +36,32 @@ def bibtex_to_markdown(bibfile):
     return outstr
 
 
+def bibtex_to_list(bibfile):
+    outlist = []
+
+    parser = bibtex.Parser()
+    bib_data = parser.parse_file(bibfile)
+
+    bib = sorted(
+        bib_data.entries.items(),
+        key=lambda item: int(item[1].fields["year"]),
+        reverse=True,
+    )
+    index = 0
+    for _, entry in bib:
+        index += 1
+        title = entry.fields["title"]
+        short = entry.fields["short"]
+        link = entry.fields["link"]
+        authors = ", ".join(
+            f"{a.first_names[0][0]}. {a.last_names[0]}" for a in entry.persons["author"]
+        )
+        authors = authors.replace("D. Petrisko", "<b>D. Petrisko</b>")
+        authors = authors.replace("D. Ruelas-Petrisko", "<b>D. Ruelas-Petrisko</b>")
+        outlist.append(f'{index}. <i>{title}</i> <a href="{link}">({short})</a><div style="margin-left: 40px;">{authors}</div>')
+
+    return outlist
+
 class BibTeXListGenerator(Generator):
 
     def __init__(self, *args, **kwargs):
@@ -53,6 +79,8 @@ class BibTeXListGenerator(Generator):
             self.bibtex_markdown = f"Error parsing bibtex: {e}"
         # Add to global context for templates if desired
         self.context["bibtex_markdown"] = self.bibtex_markdown
+        self.context["bibtex_list"] = bibtex_to_list(bibfile)
+        self.context["jinja_test"] = "Hello from Jinja2"
 
     def generate_output(self, writer):
         """

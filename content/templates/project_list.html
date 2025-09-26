@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block meta %}
+{{ super() }}
+
+{% if page.translations -%}
+<link rel="alternate" href="{{ SITEURL }}/{{ page.url }}" hreflang="{{ page.lang }}" />
+{% for p in page.translations %}
+<link rel="alternate" href="{{ SITEURL }}/{{ p.url }}" hreflang="{{ p.lang }}" />
+{% endfor %}
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<article class="single">
+  <header>
+    {% import 'partial/translations.html' as translations with context %}
+    {{ translations.translations_for(page) }}
+    <h1 id="{{ page.slug }}">{{ page.title }}</h1>
+  </header>
+  <div>
+    {% block before_content %}{% endblock %}
+    {% block page_content %}
+        {{ page.content }}
+        {% if GITHUB_USER %}
+            {% for project_name in ["black-parrot", "basejump_stl"] %}
+                {% for project in github_projects if project.name == project_name %}
+                        <h3>{{ project.name }}<sup>({{ project.language }})</sup></h3>
+                        {% if project.description %}<p>{{ project.description }}</p>{% endif %}
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+    {% endblock %}
+    {% block after_content %}{% endblock %}
+  </div>
+</article>
+{% endblock %}

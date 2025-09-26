@@ -1,7 +1,6 @@
 Title: Papers
 Date: 2025-09-24
 Author: Dan Ruelas-Petrisko
+Template: paper_list
 
-Papers are listed chronologically.
-
-{! refs.md!}
+Articles are listed (reverse) chronologically:
