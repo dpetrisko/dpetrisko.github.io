@@ -1,6 +1,8 @@
 from pelican.generators import Generator
 from pelican import signals
 
+import datetime
+import os
 
 class GitHubListGenerator(Generator):
 
