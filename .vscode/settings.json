@@ -3,6 +3,9 @@
         ".github": true,
         ".vscode": true,
         "pelican-themes": true,
-        "pelican-plugins": true
-    }
+        "pelican-plugins": true,
+        "output": true
+    },
+    "git.detectSubmodules": false,
+    "git.autoRepositoryDetection": false
 }
