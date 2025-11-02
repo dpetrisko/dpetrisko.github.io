@@ -1,6 +1,10 @@
 [submodule "pelican-themes"]
 	path = pelican-themes
 	url = https://github.com/getpelican/pelican-themes
+	ignore = dirty
+	branch = master
 [submodule "pelican-plugins"]
 	path = pelican-plugins
 	url = https://github.com/getpelican/pelican-plugins
+	ignore = dirty
+	branch = master
