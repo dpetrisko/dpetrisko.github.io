@@ -4,4 +4,10 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.14"
-dependencies = []
+dependencies = [
+    "jinja2>=3.1.6",
+    "markdown-include>=0.8.1",
+    "pelican[markdown]>=4.11.0.post0",
+    "pybtex>=0.25.1",
+    "requests>=2.25.0",
+]

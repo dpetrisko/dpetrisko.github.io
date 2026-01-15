@@ -31,8 +31,7 @@ THEME_TEMPLATES_OVERRIDES = ["content/templates"]
 
 GITHUB_USER = "dpetrisko"
 GITHUB_USER_TYPE = "all"
-#GITHUB_SORT_BY = "created"
-#GITHUB_DIRECTION = "desc"
+GITHUB_PROJECTS_LIST = ["black-parrot", "basejump_stl"]
 
 CC_LICENSE = {
     "name": "Creative Commons Attribution-NonCommercial-NoDerivatives",

@@ -3,6 +3,7 @@ from pelican import signals
 
 import datetime
 import os
+import requests
 
 class GitHubListGenerator(Generator):
 
@@ -13,43 +14,63 @@ class GitHubListGenerator(Generator):
         """
         Called first for all generators. Populate the global context with data.
         """
-        # Path to the GitHub file (customize as needed)
-        bibfile = self.settings.get("GitHub_LIST_FILE", "content/papers/papers.bib")
-        try:
-            self.github_markdown = GitHub_to_markdown(bibfile)
-        except Exception as e:
-            self.github_markdown = f"Error parsing GitHub: {e}"
-        # Add to global context for templates if desired
-        self.context["github_markdown"] = self.github_markdown
+        username = self.settings.get('GITHUB_USER')
+        user_type = self.settings.get('GITHUB_USER_TYPE', 'owner')
+        projects_list = self.settings.get('GITHUB_PROJECTS_LIST')
+        if username:
+            url = f"https://api.github.com/users/{username}/repos?type={user_type}"
+            try:
+                response = requests.get(url)
+                response.raise_for_status()
+                repos = response.json()
+                # Filter to selected projects if list is provided
+                if projects_list:
+                    repos = [r for r in repos if r.get('name') in projects_list]
+                # Sort by updated_at descending
+                repos.sort(key=lambda x: x.get('updated_at', ''), reverse=True)
+                # Create list of projects
+                projects = []
+                for repo in repos:
+                    project = {
+                        'name': repo.get('name', ''),
+                        'description': repo.get('description', '') or '',
+                        'language': repo.get('language', '') or 'Unknown',
+                        'html_url': repo.get('html_url', ''),
+                        'updated_at': datetime.datetime.fromisoformat(repo.get('updated_at', '').replace('Z', '+00:00')) if repo.get('updated_at') else None,
+                        'stars': repo.get('stargazers_count', 0),
+                        'forks': repo.get('forks_count', 0),
+                        'upstream_url': None
+                    }
+                    if repo.get('fork'):
+                        # Fetch full repo details to get upstream
+                        owner_repo = '/'.join(repo['html_url'].split('/')[-2:])
+                        full_url = f"https://api.github.com/repos/{owner_repo}"
+                        try:
+                            full_response = requests.get(full_url)
+                            full_response.raise_for_status()
+                            full_repo = full_response.json()
+                            project['upstream_url'] = full_repo.get('source', {}).get('html_url')
+                        except Exception as e:
+                            print(f"Error fetching upstream for {owner_repo}: {e}")
+                    projects.append(project)
+                self.context['github_projects'] = projects
+            except Exception as e:
+                print(f"Error fetching GitHub projects: {e}")
+                self.context['github_projects'] = []
+        else:
+            self.context['github_projects'] = []
 
     def generate_output(self, writer):
         """
         Called after generate_context. Generate output files using the writer.
         """
-        # Output file path (customize as needed)
-        output_path = self.settings.get("GitHub_LIST_OUTPUT", "output/GitHub_list.md")
-        try:
-            os.makedirs(os.path.dirname(output_path), exist_ok=True)
-            with open(output_path, "w", encoding="utf-8") as f:
-                f.write(self.github_markdown)
-        except Exception as e:
-            print(f"Error writing GitHub list: {e}")
+        # Not needed for template usage, but keeping for compatibility
+        pass
 
 
 def get_generators(generators):
     return GitHubListGenerator
 
 
-def initialize(gen):
-    if not 'GITHUB_USER' in gen.settings.keys():
-        logger.warning('GITHUB_USER not set')
-    else:
-        gen.plugin_instance = GitHubListGenerator(gen)
-
-def fetch(gen, metadata):
-    gen.context['github_projects'] = gen.plugin_instance.process()
-
-
 def register():
     signals.get_generators.connect(get_generators)
-    signals.content_written.connect(lambda: GitHubListGenerator().generate_output(None))
