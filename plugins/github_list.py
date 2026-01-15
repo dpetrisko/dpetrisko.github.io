@@ -40,21 +40,16 @@ def get_generators(generators):
     return GitHubListGenerator
 
 
-def register():
-    signals.get_generators.connect(get_generators)
-    #signals.content_written.connect(lambda: GitHubListGenerator().generate_output(None))
-
-
 def initialize(gen):
     if not 'GITHUB_USER' in gen.settings.keys():
         logger.warning('GITHUB_USER not set')
     else:
-        gen.plugin_instance = GithubProjects(gen)
+        gen.plugin_instance = GitHubListGenerator(gen)
 
 def fetch(gen, metadata):
     gen.context['github_projects'] = gen.plugin_instance.process()
 
 
-#def register():
-#    signals.article_generator_init.connect(initialize)
-#    signals.article_generator_context.connect(fetch)
+def register():
+    signals.get_generators.connect(get_generators)
+    signals.content_written.connect(lambda: GitHubListGenerator().generate_output(None))
