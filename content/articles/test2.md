@@ -1,4 +1,5 @@
-Title: Projects
+Title: test2
 Date: 2025-09-24
 Author: Dan Ruelas-Petrisko
-Template: project_list
+
+This is more info about me

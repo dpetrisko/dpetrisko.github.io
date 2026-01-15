@@ -20,20 +20,24 @@
   </header>
   <div>
     {% block before_content %}{% endblock %}
-{% block page_content %}
+    {% block page_content %}
         {{ page.content }}
         {% if GITHUB_USER %}
-            <h2>GitHub Projects</h2>
-            <ul>
-            {% for project in github_projects %}
-                <li>
-                    <h3><a href="{{ project.upstream_url or project.html_url }}">{{ project.name }}</a><sup>({{ project.language }})</sup></h3>
-                    {% if project.description %}<p>{{ project.description }}</p>{% endif %}
-                    {% if project.upstream_url %}<p>Fork of <a href="{{ project.upstream_url }}">{{ project.upstream_url | replace('https://github.com/', '') }}</a></p>{% endif %}
-                    <p>Updated: {{ project.updated_at | strftime('%Y-%m-%d') }} | Stars: {{ project.stars }} | Forks: {{ project.forks }}</p>
-                </li>
+            {% for section in ['lead', 'maintainer', 'contributor', 'tester'] %}
+                {% if github_projects_by_type[section] %}
+                    <h3>{{ section|title }}</h3>
+                    <ul style="list-style: none;">
+                    {% for project in github_projects_by_type[section] %}
+                        <li>
+                            <h4><a href="{{ project.upstream_url or project.html_url }}">{{ project.name }}</a><sup>({{ project.language }})</sup></h4>
+                            {% if project.description %}<p>{{ project.description }}</p>{% endif %}
+                            {% if project.upstream_url %}<p>Fork of <a href="{{ project.upstream_url }}">{{ project.upstream_url | replace('https://github.com/', '') }}</a></p>{% endif %}
+                            <p>Updated: {{ project.updated_at | strftime('%Y-%m-%d') }} | Stars: {{ project.stars }} | Forks: {{ project.forks }}</p>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
             {% endfor %}
-            </ul>
         {% endif %}
     {% endblock %}
     {% block after_content %}{% endblock %}

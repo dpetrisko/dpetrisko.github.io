@@ -3,3 +3,6 @@ __pycache__
 output/
 .DS_STORE
 content/gen/
+.env
+github_cache.sqlite
+cache/

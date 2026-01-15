@@ -1,0 +1,13 @@
+/* Make article titles not clickable */
+article header h2 a {
+    pointer-events: none;
+    cursor: default;
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Also make continue reading not clickable */
+article .btn {
+    pointer-events: none;
+    cursor: default;
+}

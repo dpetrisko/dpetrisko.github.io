@@ -9,5 +9,7 @@ dependencies = [
     "markdown-include>=0.8.1",
     "pelican[markdown]>=4.11.0.post0",
     "pybtex>=0.25.1",
+    "python-dotenv>=1.2.1",
     "requests>=2.25.0",
+    "requests-cache>=1.2.1",
 ]
